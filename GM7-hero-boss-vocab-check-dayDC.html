@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hero vs Boss – Grade 7 Vocabulary</title>
+<style>
+:root{--bg:#f6e7c8;--card:#fff8e8;--ink:#3b2a1a;--line:#8a5a2b;--ok:#2e9e4f;--bad:#d9433b;--acc:#e08a1e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2018;--card:#3a2c20;--ink:#f6e7c8;--line:#c28a4a}}
+:root[data-theme="dark"]{--bg:#2a2018;--card:#3a2c20;--ink:#f6e7c8;--line:#c28a4a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS",Verdana,sans-serif;display:flex;justify-content:center}
+#app{width:100%;max-width:560px;padding:14px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h1{margin:4px 0;font-size:26px;text-align:center}
+.sub{text-align:center;margin:0 0 10px;opacity:.85}
+button{font:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:12px;font-weight:bold;font-size:18px}
+button:active{transform:scale(.97)}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:bold;font-size:18px}
+.bar{height:16px;border:2px solid var(--line);border-radius:8px;overflow:hidden;background:rgba(0,0,0,.12)}
+.bar i{display:block;height:100%;width:100%;background:var(--bad);transition:width .3s}
+.bar.t i{background:var(--acc);transition:width .1s linear}
+.arena{display:flex;justify-content:space-between;align-items:center;font-size:56px;padding:6px 18px}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.lbl{text-align:center;opacity:.8;margin-top:6px}
+.vn{font-size:30px;font-weight:bold;text-align:center;margin:6px 0}
+.pat{font-size:26px;letter-spacing:4px;text-align:center;margin:6px 0 12px;font-family:monospace}
+input{width:100%;font:inherit;font-size:24px;padding:12px;border:3px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);text-align:center}
+.act{display:block;width:100%;margin-top:10px;background:var(--acc);color:#fff;font-size:20px}
+#fb{font-size:18px;margin-top:10px;min-height:24px;text-align:center}
+.say{font-size:20px;padding:4px 12px;margin-left:6px}
+.big{font-size:64px;text-align:center}
+.rv{border-left:6px solid var(--bad);padding:6px 10px;margin:8px 0;background:rgba(0,0,0,.06);border-radius:6px;font-size:17px}
+.g{color:var(--ok);font-weight:bold}.w{color:var(--bad);font-weight:bold}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),app=$("#app");
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+const esc=t=>t.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=t=>t.toLowerCase().replace(/\s+/g," ").trim();
+const WORDS=[
+[["quantity"],"n","số lượng","/ˈkwɒntəti/"],
+[["fiber","fibre"],"n","sợi, chất xơ","/ˈfaɪbə/"],
+[["nutrient"],"n","chất dinh dưỡng","/ˈnjuːtriənt/"],
+[["nutrition"],"n","dinh dưỡng","/njuˈtrɪʃn/"],
+[["nutritional"],"adj","thuộc về dinh dưỡng","/njuˈtrɪʃənl/"],
+[["nutritionist"],"n","chuyên gia dinh dưỡng","/njuˈtrɪʃənɪst/"],
+[["prefer"],"v","thích hơn (prefer sth to sth)","/prɪˈfɜː/"],
+[["preference"],"n","sự yêu thích hơn, sở thích","/ˈprefrəns/"],
+[["literature"],"n","văn học","/ˈlɪtrətʃə/"],
+[["literate"],"adj","biết đọc biết viết","/ˈlɪtərət/"],
+[["illiterate"],"adj","mù chữ","/ɪˈlɪtərət/"],
+[["boredom"],"n","sự nhàm chán","/ˈbɔːdəm/"],
+[["rehearse"],"v","tập dượt, diễn tập","/rɪˈhɜːs/"],
+[["rehearsal"],"n","buổi tập dượt","/rɪˈhɜːsl/"],
+[["solve","tackle","address","handle","deal with"],"v / phr v","giải quyết (vấn đề)","solve /sɒlv/ · tackle /ˈtækl/ · address /əˈdres/ · handle /ˈhændl/ · deal with /ˈdiːl wɪð/"],
+[["solution"],"n","giải pháp","/səˈluːʃn/"],
+[["postpone"],"v","hoãn lại","/pəˈspəʊn/"],
+[["disappointed"],"adj","thất vọng (về người)","/ˌdɪsəˈpɔɪntɪd/"],
+[["disappointment"],"n","sự thất vọng","/ˌdɪsəˈpɔɪntmənt/"],
+[["disappoint"],"v","làm thất vọng","/ˌdɪsəˈpɔɪnt/"],
+[["convenient"],"adj","tiện lợi","/kənˈviːniənt/"],
+[["convenience"],"n","sự tiện lợi","/kənˈviːniəns/"],
+[["pleasure"],"n","niềm vui, sự vinh hạnh","/ˈpleʒə/"],
+[["classify"],"v","phân loại","/ˈklæsɪfaɪ/"],
+[["classification"],"n","sự phân loại","/ˌklæsɪfɪˈkeɪʃn/"]];
+const POS={n:"noun",v:"verb",adj:"adjective","v / phr v":"verb"};
+const say=w=>{try{const u=new SpeechSynthesisUtterance(w);u.lang="en-US";u.rate=.8;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}};
+const T=25;let NAME="",G;
+const pat=w=>w.split(" ").map(p=>"_".repeat(p.length).split("").join(" ")).join("   ");
+function intro(){
+  app.innerHTML=`<h1>🗡️ Hero vs Boss</h1><p class="sub">Grade 7 Vocabulary · Word Families<br>${WORDS.length} questions · ${T} seconds each</p>
+  <div class="card"><div class="vn" style="font-size:22px">What's your name, hero?</div>
+  <input id="nm" maxlength="20" placeholder="Type your name" autocomplete="off">
+  <button class="act" id="go">Start ➜</button><div id="fb"></div></div>`;
+  const go=()=>{const v=$("#nm").value.trim();if(!v){$("#fb").textContent="Please type your name first 🙂";return}NAME=v;start()};
+  $("#go").onclick=go;$("#nm").onkeydown=e=>{if(e.key==="Enter")go()};$("#nm").focus();
+}
+function start(){G={qs:sh(WORDS).map(x=>({x,r:1})),i:0,ok:0,wrong:[],left:T,t:0,done:false};show()}
+function show(){
+  const {x,r}=G.qs[G.i],[ws,pos,vn]=x,multi=ws.length>1;G.left=T;G.done=false;
+  const hint=multi?`<div class="pat" style="font-size:18px;letter-spacing:0">💡 ${ws.length} correct words – type any one!</div>`:`<div class="pat">${r==1?pat(ws[0]):"?"}</div>`;
+  app.innerHTML=`<div class="card"><div class="top"><span>🧙 ${esc(NAME)}</span><span>${G.i+1}/${G.qs.length}</span><span>⭐ ${G.ok}</span></div>
+  <div class="arena"><span id="h">🧙</span><span id="b">🐲</span></div>
+  <div class="bar" title="Boss HP"><i id="bh" style="width:${100-G.ok/G.qs.length*100}%"></i></div></div>
+  <div class="card"><div class="bar t"><i id="tm"></i></div>
+    <div class="lbl">Type the English word (${POS[pos]}) for:</div><div class="vn">${vn}</div>${hint}
+  <input id="in" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type the English word">
+  <button class="act" id="ck">Check ✔</button><div id="fb"></div></div>`;
+  $("#in").focus();$("#ck").onclick=()=>check();
+  $("#in").onkeydown=e=>{if(e.key==="Enter")check()};
+  clearInterval(G.t);
+  G.t=setInterval(()=>{G.left-=.1;$("#tm").style.width=G.left/T*100+"%";if(G.left<=0)check(true)},100);
+}
+function check(timeout){
+  if(G.done)return;G.done=true;clearInterval(G.t);
+  const {x}=G.qs[G.i],[ws,pos,vn,ipa]=x,v=$("#in").value,good=!timeout&&ws.includes(norm(v)),last=G.i==G.qs.length-1,w=ws.join(" / ");
+  $("#in").disabled=true;$("#ck").remove();
+  if(good){G.ok++;$("#b").classList.add("shake");$("#bh").style.width=100-G.ok/G.qs.length*100+"%";$("#in").style.borderColor="var(--ok)"}
+  else{G.wrong.push({vn,pos,w,s:ws[0],ipa,you:norm(v)});$("#h").classList.add("shake");$("#in").style.borderColor="var(--bad)"}
+  say(norm(v)&&good?norm(v):ws[0]);
+  $("#fb").innerHTML=(good?"✅ <b>Correct!</b>":timeout&&!v?"⏰ <b>Time's up!</b>":"❌ <b>Not quite.</b>")+` ${ws.length>1&&good?"All answers:":"The answer is"} <span class="g">${w}</span> <button class="say" id="sp">🔊</button><br><small>${ipa}</small><button class="act next">${last?"See results":"Next ➜"}</button>`;
+  $("#sp").onclick=()=>say(ws[0]);
+  $(".next").onclick=()=>{last?end():(G.i++,show())};
+}
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&G&&G.done&&e.target===document.body){const n=$(".next");if(n)n.click()}});
+function end(){
+  const n=G.qs.length,p=G.ok/n,st=p>=.9?"⭐⭐⭐":p>=.7?"⭐⭐":p>=.5?"⭐":"";
+  const msg=p>=.9?"Amazing":p>=.7?"Great job":p>=.5?"Good try":"Keep practicing";
+  app.innerHTML=`<div class="card"><div class="big">${p>=.5?"🏆":"💪"}</div><h1>${esc(NAME)}: ${G.ok} / ${n}</h1>
+  <p class="sub">${st}<br>${msg}, ${esc(NAME)}!${p>=.7?" Boss defeated!":""}</p>
+  <button class="act" id="a">🔁 Play again</button></div>
+  <div class="card"><h1 style="font-size:22px">${G.wrong.length?`Review: ${G.wrong.length} mistake${G.wrong.length>1?"s":""}`:"🎉 No mistakes!"}</h1>
+  ${G.wrong.map(x=>`<div class="rv">${x.vn} <small>(${POS[x.pos]})</small><br>Your answer: <span class="w">${esc(x.you)||"(no answer)"}</span> · Correct: <span class="g">${x.w}</span> <small>${x.ipa}</small> <button class="say" data-w="${x.s}">🔊</button></div>`).join("")}</div>`;
+  $("#a").onclick=start;
+  app.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>say(b.dataset.w));
+}
+intro();
+</script></body></html>
